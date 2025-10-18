@@ -1,0 +1,22 @@
+# ROS workspace build artifacts
+/build/
+/install/
+/devel/
+
+# Python cache (if using Python nodes)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp

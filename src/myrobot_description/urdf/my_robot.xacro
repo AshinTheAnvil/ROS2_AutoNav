@@ -59,7 +59,12 @@
   <link name="camera">
     <inertial>
       <mass value="0.1"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
     </inertial>
     <collision>
       <geometry><box size="0.05 0.05 0.05"/></geometry>
@@ -78,30 +83,33 @@
     <child link="camera"/>
   </joint>
 
-  <!-- === HOKUYO LIDAR === -->
-  <link name="hokuyo">
-    <inertial>
-      <mass value="0.01"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-    </inertial>
-    <collision>
-      <geometry><box size="0.1 0.1 0.1"/></geometry>
-    </collision>
-    <visual>
-      <geometry>
-        <mesh filename="package://myrobot_description/meshes/hokuyo.dae"/>
-      </geometry>
-      <material name="hokuyo_color">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-      </material>
-    </visual>
-  </link>
+  
 
-  <joint name="hokuyo_joint" type="fixed">
-    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
-    <parent link="chassis"/>
-    <child link="hokuyo"/>
-  </joint>
+  <!-- === LIDAR === -->
+  <link name="lidar">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.1"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.05" radius="0.1"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
+    </link>
+
+  <joint name="lidar_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="lidar"/>
+        <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
 
   <!-- === WHEELS === -->
   <link name="left_wheel">
